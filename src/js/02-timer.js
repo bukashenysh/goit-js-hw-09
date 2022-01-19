@@ -37,10 +37,8 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    const choosedTime = selectedDates[0];
-    const choosedTimeMs = choosedTime.getTime();
-    selectedDate = choosedTimeMs;
-    if (choosedTimeMs < Date.now()) {
+    selectedDate = selectedDates[0].getTime();
+    if (selectedDate < Date.now()) {
       window.alert("Please choose a date in the future")
     } else {
       refs.startBtn.disabled = false;
@@ -74,10 +72,10 @@ function addLeadingZero(value) {
 };
 
 function updateTimerValue({ days, hours, minutes, seconds }) {
-  refs.days.textContent = addLeadingZero(days);
-  refs.hours.textContent = addLeadingZero(hours);
-  refs.minutes.textContent = addLeadingZero(minutes);
-  refs.seconds.textContent = addLeadingZero(seconds);
+  refs.days.textContent = days;
+  refs.hours.textContent = hours;
+  refs.minutes.textContent = minutes;
+  refs.seconds.textContent = seconds;
 }
 
 refs.startBtn.addEventListener('click', timer.start);
