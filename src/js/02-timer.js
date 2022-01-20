@@ -4,6 +4,7 @@ import '../css/common.css';
 
 let intervalId = null;
 let selectedDate = null;
+let timerValue = null;
 
 const refs = {
   startBtn: document.querySelector('[data-start]'),
@@ -19,15 +20,19 @@ const timer = {
   start() {
     intervalId = setInterval(() => {
       const currentTime = Date.now();
-      const timerValue = selectedDate - currentTime;
-
+      timerValue = selectedDate - currentTime;
+      console.log(timerValue);
+      if (timerValue <= 0) { 
+        timer.end();
+      }
       updateTimerValue(convertMs(timerValue))
     }, 1000);
   },
   end() { 
     clearInterval(intervalId);
     refs.startBtn.disabled = true;
-    window.alert('Please restart this tab to see small magic ones again:)')
+    window.alert('Please restart this tab to see small magic ones again:)');
+        timerValue = 0;
   },
 };
 
